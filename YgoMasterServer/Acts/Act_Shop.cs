@@ -299,8 +299,12 @@ namespace YgoMaster
                         if ((price.ItemAmount > 1 || shopItem.Prices.Count == 1) &&
                             odds != null && shopItem.GetFinalCardRarityGuarantee(odds) == CardRarity.SuperRare)
                         {
-                            // This is when a single pack contains a SR (and there's no multi buy option)
-                            pop = "IDS_SHOP_BUY_BUTTON_ADS_CARDPACK_10_SR_SET";// "At least 1 SR guaranteed"
+                            // Only show the "SR guaranteed" SET pop if SR guarantees are enabled (shop + item)
+                            if (!Shop.DisableSuperRareGuarantee && !shopItem.DisableSuperRareGuarantee)
+                            {
+                                // This is when a single pack contains a SR (and there's no multi buy option)
+                                pop = "IDS_SHOP_BUY_BUTTON_ADS_CARDPACK_10_SR_SET";// "At least 1 SR guaranteed"
+                            }
                         }
                     }
                     else if (shopItem.Category == ShopCategory.Special)
@@ -722,8 +726,16 @@ namespace YgoMaster
                         if ((packIndex + 1) % shopExtraGuaranteePackCount == 0)
                         {
                             bool ur = isUltraRareGuaranteed && ((packIndex + 1) / shopExtraGuaranteePackCount) <= rarityGuaranteedCount && rarityGuaranteedCount > 0;
-                            CardRarity newRarityGuarantee = ur ? CardRarity.UltraRare : CardRarity.SuperRare;
-                            if (newRarityGuarantee > rarityGuarantee)
+                            // Determine guarantee: UR if ur applies; otherwise SR only if SR guarantees are enabled at shop and item level.
+                            CardRarity newRarityGuarantee = CardRarity.Normal;
+                            if (ur)
+                            {
+                                newRarityGuarantee = CardRarity.UltraRare;
+                            }
+                            else if (!Shop.DisableSuperRareGuarantee && !targetShopItem.DisableSuperRareGuarantee)
+                            {
+                                newRarityGuarantee = CardRarity.SuperRare;
+                            }
                             {
                                 rarityGuarantee = newRarityGuarantee;
                             }
@@ -839,7 +851,7 @@ namespace YgoMaster
                             CardRarity cardRarity;
                             if (TryGetCardRarity(cardId, match.Standard ? standardPackCardRare : packCardRare, out cardRarity) && cardRarity == rarity)
                             {
-                                if (Shop.NoDuplicatesPerPack && seenCardIdsThisPack.Contains(cardId) && cardRarity < CardRarity.SuperRare)
+                                if (Shop.NoDuplicatesPerPack && seenCardIdsThisPack.Contains(cardId))
                                 {
                                     continue;
                                 }

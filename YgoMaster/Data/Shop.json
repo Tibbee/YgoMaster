@@ -3,6 +3,7 @@
     "PutAllCardsInStandardPack": false,
     "NoDuplicatesPerPack": true,
     "DisableCardStyleRarity": false,
+    "DisableSuperRareGuarantee": false,
     "DisableUltraRareGuarantee": false,
     "UpgradeRarityWhenNotFound": true,
     "UnlockAllSecrets": false,

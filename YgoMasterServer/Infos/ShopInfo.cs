@@ -48,6 +48,11 @@ namespace YgoMaster
         public bool DisableUltraRareGuarantee;
 
         /// <summary>
+        /// Disable the automatic "every 10th pack gets at least a SR if UR isn't applied"
+        /// </summary>
+        public bool DisableSuperRareGuarantee; 
+
+        /// <summary>
         /// Upgrade card rarity if the given card rarity is not found (and no lower rarities are found).
         /// If this occurs and this is false no card will be given.
         /// </summary>
@@ -205,6 +210,11 @@ namespace YgoMaster
         /// Disable the ultra rare guarantee (which is determined based on whether the previous 10 pack didn't have an UR)
         /// </summary>
         public bool DisableUltraRareGuarantee;
+
+        /// <summary>
+        /// Disable the automatic "every 10th pack gets at least a SR if UR isn't applied"
+        /// </summary>
+        public bool DisableSuperRareGuarantee;
 
         /// <summary>
         /// The type of bundle (10SR, 30UR, etc)

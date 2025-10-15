@@ -1974,6 +1974,7 @@ namespace YgoMaster
                 Shop.DisableCardStyleRarity = Utils.GetValue<bool>(data, "DisableCardStyleRarity");
                 Shop.UnlockAllSecrets = Utils.GetValue<bool>(data, "UnlockAllSecrets");
                 Shop.DisableUltraRareGuarantee = Utils.GetValue<bool>(data, "DisableUltraRareGuarantee");
+                Shop.DisableSuperRareGuarantee = Utils.GetValue<bool>(data, "DisableSuperRareGuarantee");
                 Shop.UpgradeRarityWhenNotFound = Utils.GetValue<bool>(data, "UpgradeRarityWhenNotFound");
 
                 Shop.DefaultSecretDuration = Utils.GetValue<long>(data, "DefaultSecretDuration");
