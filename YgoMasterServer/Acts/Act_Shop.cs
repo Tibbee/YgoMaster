@@ -286,8 +286,12 @@ namespace YgoMaster
                             }
                             if (price.ItemAmount == shopExtraGuaranteePackCount)
                             {
-                                pop = "IDS_SHOP_BUY_BUTTON_ADS_CARDPACK_10_SR";// "At least 1 Super Rare guaranteed in 10 Packs"
-                                buttonType = ShopItemPriceButtonType.Yellow;
+                                if (!Shop.DisableSuperRareGuarantee && !shopItem.DisableSuperRareGuarantee)
+                                {
+                                    pop = "IDS_SHOP_BUY_BUTTON_ADS_CARDPACK_10_SR";// "At least 1 Super Rare guaranteed in 10 Packs"
+                                    buttonType = ShopItemPriceButtonType.Yellow;
+                                }
+                                
                                 if (request.Player.ShopState.IsUltraRareGuaranteed(shopItem.Id))
                                 {
                                     pop = "IDS_SHOP_BUY_BUTTON_ADS_CARDPACK_10_UR";// "Ultra Rare guaranteed in 10 Packs"
